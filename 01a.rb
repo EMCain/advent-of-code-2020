@@ -1,6 +1,6 @@
 # open a file and convert it into a list of whatever integer is on each line 
 def read_file(filename)
-    str_list = IO.readlines(filename)
+    str_list = File.readlines(filename)
     return str_list.map{|x| x.to_i}.compact
 end
 
