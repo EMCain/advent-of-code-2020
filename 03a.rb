@@ -2,11 +2,14 @@ class Map
     @@rise = 1
     @@run = 3
     def initialize(filename)
+        @x_across = 0
+        @y_down = 0  # technically an inverted y axis 
+
         initial_rows = Array.new
         initial_width = 0
         lines = File.readlines(filename, chomp: true)
         lines.each do | line |
-            row = line.each_char.to_a
+            row = line.strip.each_char.to_a
             initial_rows.push(row)
             if row.length > initial_width
                 initial_width = row.length
@@ -30,16 +33,40 @@ class Map
             puts row.join("")
         end
     end
+
+    def value_at_coords
+        row = @rows[@y_down]
+        if row == nil
+            return nil 
+        end  
+        value = row[@x_across]
+        return value
+    end
+
+    def step
+        @y_down += @@rise
+        @x_across += @@run
+        return value_at_coords
+    end 
  end
 
 def get_answer(filename)
     m = Map.new(filename)
     m.print
+    value = m.value_at_coords
+    total = 0
+    while value != nil
+        value = m.step
+        if value == "#"
+            total += 1
+        end
+    end 
+    puts "total is #{total}"
 end
 
 challenge_name = "03a"
 
 puts "test:"
 get_answer("inputs/#{challenge_name}_test.txt")
-# puts "actual:"
-# get_answer("inputs/#{challenge_name}_real.txt")
+puts "actual:"
+get_answer("inputs/#{challenge_name}_real.txt")
