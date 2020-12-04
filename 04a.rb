@@ -12,6 +12,7 @@ def get_passports(filename)
             current_passport += " #{stripped_line} "
         end
     end
+    passports.push(current_passport)
     return passports
 end
 
@@ -26,8 +27,6 @@ def validate_passports(passports)
                 missing.push(field)
             end
         end
-        if valid == 0
-            puts "#{p} is missing #{missing.join(", ")}"
         end
         valid_count += valid
     end
@@ -44,5 +43,7 @@ challenge_name = "04a"
 
 puts "test:"
 get_answer("inputs/#{challenge_name}_test.txt")
+puts "fischer:" # asked a coworker to help by giving me the first 50 passwords and the results they got
+get_answer("inputs/#{challenge_name}_fischer.txt")
 puts "actual:"
 get_answer("inputs/#{challenge_name}_real.txt")
