@@ -69,6 +69,7 @@ end
 
 def validate_passports(passports)
     valid_passports = 0
+    index = 0
     passports.each do | p |
         valid = 1
         REQUIRED_FIELDS.each do |field|
@@ -76,6 +77,8 @@ def validate_passports(passports)
                 valid = 0
             end
         end
+        puts "#{valid} #{index}"
+        index += 1
         valid_passports += valid
     end
     return valid_passports
@@ -92,10 +95,10 @@ challenge_name = "04b"
 puts "test:"
 get_answer("inputs/#{challenge_name}_test.txt")
 
-# puts "fischer:" # asked a coworker to help by giving me the first 50 passwords and the results they got
-# get_answer("inputs/#{challenge_name}_fischer.txt")
-
-
 challenge_name = "04a"
-puts "actual:"
-get_answer("inputs/#{challenge_name}_real.txt")
+puts "fischer:" # asked a coworker to help by giving me the first 50 passwords and the results they got
+get_answer("inputs/#{challenge_name}_fischer.txt")
+
+
+# puts "actual:"
+# get_answer("inputs/#{challenge_name}_real.txt")
